@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthcareApi", "HealthcareApi\HealthcareApi.csproj", "{F6645D44-2F18-449C-AACE-48462EDCA762}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "Api\Api.csproj", "{F6645D44-2F18-449C-AACE-48462EDCA762}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MachineLearningModel", "MachineLearningModel\MachineLearningModel.csproj", "{35CDFA21-086A-46B5-9FA7-CDC5F6BD5457}"
 EndProject
