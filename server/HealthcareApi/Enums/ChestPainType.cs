@@ -5,11 +5,11 @@ namespace HealthcareApi.Enums;
 public enum ChestPainType
 {
   [Display(Name = "Typical Angina")]
-  TypicalAngina = 0,
+  TypicalAngina = 1,
   [Display(Name = "Atypical Angina")]
-  AtypicalAngina = 1,
+  AtypicalAngina = 2,
   [Display(Name = "Non-anginal Pain")]
-  NonAnginalPain = 2,
+  NonAnginalPain = 3,
   [Display(Name = "Asymptomatic")]
-  Asymptomatic = 3
+  Asymptomatic = 4
 }

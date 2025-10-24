@@ -16,8 +16,8 @@ const ClinicalRecords = () => {
   }, []);
 
   const handleDelete = (id: number) => async () => {
-   const res = await DeleteClinicalRecord(id)
-    if(res){
+   const result = await DeleteClinicalRecord(id)
+    if(result){
       setClinicalRecords(clinicalRecords.filter(record => record.id !== id));
     }
   }
@@ -33,7 +33,7 @@ const ClinicalRecords = () => {
         `${record.recordedByDoctor.firstName} ${record.recordedByDoctor.lastName}`,
         new Date(record.recordedDate).toLocaleDateString(),
         record.patient.sex,
-        record.probability.toFixed(2) * 100  + '%',
+        (Math.round(record.probability * 100 * 100) / 100).toFixed(2) + '%',
         record.label ? 'True' : 'False',
         <Link to={`${record.id}`} className="text-gray-900"> Click here to view full details </Link>,
         <button onClick={handleDelete(record.id)} className="bg-red-600 cursor-pointer hover:bg-red-700 text-white font-bold py-1 px-2 rounded ml-2"> Delete </button>

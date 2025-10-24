@@ -6,9 +6,9 @@ namespace HealthcareApi.Enums;
 public enum Slope
 {
   [Display(Name = "Uplsoping")]
-  Uplsoping = 0,
+  Uplsoping = 1,
   [Display(Name = "Flat")]
-  Flat = 1,
+  Flat = 2,
   [Display(Name ="Downsloping")]
-  Downsloping = 2,
+  Downsloping = 3,
 }

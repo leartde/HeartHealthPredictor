@@ -64,8 +64,9 @@ const AddClinicalRecord = () => {
 
   const handleSubmit = async(e)=>{
     e.preventDefault();
-    const res  = await CreateClinicalRecord(formData);
-    if(res.status == 200){
+    console.log(formData)
+    const result  = await CreateClinicalRecord(formData);
+    if(result){
       navigate("/clinical-records");
     }
   }
@@ -100,10 +101,10 @@ const AddClinicalRecord = () => {
         <select className="bg-gray-200 px-2 w-42" onChange={handleInputChange} id="chestPainType" name="chestPainType"
                 value={formData.chestPainType}>
           <option>---</option>
-          <option value={0}> Typical Angina</option>
-          <option value={1}> Atypical Angina</option>
-          <option value={2}> Non-anginal pain</option>
-          <option value={3}> Asymptomatic</option>
+          <option value={1}> Typical Angina</option>
+          <option value={2}> Atypical Angina</option>
+          <option value={3}> Non-anginal pain</option>
+          <option value={4}> Asymptomatic</option>
 
         </select>
       </div>
@@ -184,9 +185,9 @@ const AddClinicalRecord = () => {
                 name="slope"
                 value={(formData.slope)}>
           <option>---</option>
-          <option value={0}> Uplsoping</option>
-          <option value={1}>Flat</option>
-          <option value={2}>Downsloping</option>
+          <option value={1}> Uplsoping</option>
+          <option value={2}>Flat</option>
+          <option value={3}>Downsloping</option>
         </select>
       </div>
 
@@ -208,9 +209,9 @@ const AddClinicalRecord = () => {
                 name="thalassemia"
                 value={(formData.thalassemia)}>
           <option>---</option>
-          <option value={1}>Fixed defect</option>
-          <option value={2}>Normal</option>
-          <option value={3}>Reversible defect</option>
+          <option value={3}>Normal</option>
+          <option value={6}>Fixed defect</option>
+          <option value={7}>Reversible defect</option>
         </select>
       </div>
 

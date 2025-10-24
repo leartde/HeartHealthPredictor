@@ -19,7 +19,7 @@ public class MachineLearningBuilder
 
   public MachineLearningBuilder WithDataDirectory(string directoryPath)
   {
-    _dataPath = Path.Combine(_dataPath, directoryPath);
+    _dataPath = directoryPath;
     return this;
   }
 

@@ -11,6 +11,7 @@ const ClinicalRecord = () => {
     const getRecord = async()=>{
       const data = await FetchClinicalRecord(Number(id));
       setRecord(data);
+      console.log(data);
       setLoading(false);
     }
     getRecord().then();
@@ -58,8 +59,8 @@ const ClinicalRecord = () => {
         </tr>
 
         <tr className="border-b border-gray-100">
-          <td className="py-3 px-4 font-medium text-gray-600">Fasting blood sugar &gt;120 mg/dL</td>
-          <td className="py-3 px-4 text-gray-900">{record?.fastingBloodSugar ? 'True' : 'False'}</td>
+          <td className="py-3 px-4 font-medium text-gray-600">Fasting blood sugar</td>
+          <td className="py-3 px-4 text-gray-900">{record?.fastingBloodSugar}</td>
         </tr>
 
         <tr className="border-b border-gray-100">

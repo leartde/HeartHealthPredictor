@@ -6,6 +6,8 @@ using MachineLearningModel.DataEntities;
 using MachineLearningModel.Enums;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.ML;
+using Microsoft.ML;
 
 namespace HealthcareApi.Controllers;
 
@@ -14,16 +16,13 @@ namespace HealthcareApi.Controllers;
 public class ClinicalRecordController : ControllerBase
 {
   private readonly ApplicationDbContext _context;
-  private readonly TrainingResult _trainingResult;
+  private readonly PredictionEnginePool<HeartDiseaseData, HeartDiseasePrediction> _predictionEnginePool;
 
-  public ClinicalRecordController(ApplicationDbContext context)
+  public ClinicalRecordController(ApplicationDbContext context,
+    PredictionEnginePool<HeartDiseaseData, HeartDiseasePrediction> predictionEnginePool)
   {
     _context = context;
-    _trainingResult = new MachineLearningBuilder()
-      .WithData("heart.csv")
-      .WithAlgorithm(TrainingAlgorithm.SdcaLogisticRegression)
-      .WithTestSplit(0.2)
-      .Build();
+    _predictionEnginePool = predictionEnginePool;
   }
 
   [HttpGet]
@@ -44,6 +43,8 @@ public class ClinicalRecordController : ControllerBase
     if (clinicalRecord is null) return BadRequest($"Couldn't find clinical record with id: {id}");
     return Ok(clinicalRecord.ToDto());
   }
+  
+  
 
   [HttpPost]
   public async Task<IActionResult> CreateClinicalRecord(AddClinicalRecordDto clinicalRecordDto)
@@ -67,12 +68,14 @@ public class ClinicalRecordController : ControllerBase
       Thalach = (float)clinicalRecordDto.MaximumHeartRate,
       Exang = clinicalRecordDto.ExerciseInducedAngina ? 1f : 0f,
       Oldpeak = (float)clinicalRecordDto.OldPeak,
+      Slope = (float)clinicalRecordDto.Slope,
       Ca = (float)clinicalRecordDto.MajorVesselsColored,
       Thal = (float)clinicalRecordDto.Thalassemia
     };
     
-    var prediction =  Predictor
-      .UseModelWithSingleItem(_trainingResult.Context, _trainingResult.Model, heartDiseaseData);
+
+    
+    var prediction = await Task.FromResult(_predictionEnginePool.Predict("HeartDiseaseModel", heartDiseaseData));
     var clinicalRecordToAdd = clinicalRecordDto.ToEntity();
     clinicalRecordToAdd.Label = prediction.Prediction;
     clinicalRecordToAdd.Probability = prediction.Probability;

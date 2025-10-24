@@ -24,11 +24,9 @@ const AddPatient = () => {
     )};
   const handleSubmit = async(e)=>{
     e.preventDefault();
-    const res = await CreatePatient(formData);
-    if(res.status === 200){
-      navigate("/patients")
-      console.log(res.data)
-    }
+    const result = await CreatePatient(formData);
+    if(result)navigate("/patients")
+
   }
   return (
     <form onSubmit={handleSubmit} className="flex flex-col bg-green-200/80 rounded-md p-4 text-gray-600 gap-2">

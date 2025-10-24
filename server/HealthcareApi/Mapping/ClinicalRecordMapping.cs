@@ -19,7 +19,7 @@ public static class ClinicalRecordMapping
       RestingBloodPressure = entity.RestingBloodPressure,
       CholesterolTotal = entity.CholesterolTotal,
       FastingBloodSugar =
-        entity.FastingBloodSugar ? "Greater than or equal to 120mg/ml": "Lower than 120mg/ml",
+        entity.FastingBloodSugar ? "Greater than or equal to 120 mg/ml": "Lower than 120 mg/ml",
       RestEcg = entity.RestEcg.GetDisplayName(),
       MaximumHeartRate = entity.MaximumHeartRate,
       ExerciseInducedAngina = entity.ExerciseInducedAngina,
