@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router";
 import type { ClinicalRecord } from "../Types/ClinicalRecord.ts";
 import FetchClinicalRecord from "../Services/ClinicalRecord/FetchClinicalRecord.ts";
+import { riskLabel } from "../Utils/riskLabel.ts";
 
 const ClinicalRecord = () => {
   const {id} = useParams();
@@ -101,7 +102,7 @@ const ClinicalRecord = () => {
 
         <tr className="border-b border-gray-100 bg-gray-50">
           <td className="py-3 px-4 font-semibold text-gray-700">Label</td>
-          <td className="py-3 px-4 font-semibold text-gray-900">{record?.label ? 'True' : 'False'}</td>
+          <td className="py-3 px-4 font-semibold text-gray-900">{riskLabel(record?.probability)}</td>
         </tr>
 
         <tr className="border-b border-gray-100 bg-gray-50">

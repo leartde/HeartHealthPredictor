@@ -27,7 +27,7 @@ public static class ClinicalRecordMapping
       MajorVesselsColored = entity.MajorVesselsColored,
       Thalassemia = entity.Thalassemia.GetDisplayName(),
       Label = entity.Label,
-      Probability = entity.Probability
+      Probability = Math.Truncate(entity.Probability * 100) / 100
     };
   }
 

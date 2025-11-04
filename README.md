@@ -32,7 +32,7 @@ string modelPath = Path.Combine(projectDirectory, "HeartDiseaseModel.zip");
 res.Context.Model.Save(res.Model, res.SplitData.TrainSet.Schema, modelPath); 
 ```
 
- #### Creating a prediction engine on the API:
+ #### Creating a prediction engine in the API:
 ```C#
 var modelPath = Path.Combine(builder.Environment.ContentRootPath, "MachineLearningModels", "HeartDiseaseModel.zip");
 builder.Services.AddPredictionEnginePool<HeartDiseaseData, HeartDiseasePrediction>()
