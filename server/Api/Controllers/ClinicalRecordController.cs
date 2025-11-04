@@ -1,13 +1,10 @@
 using Api.Data;
 using Api.DTOs.ClinicalRecord;
 using Api.Mapping;
-using MachineLearningModel;
 using MachineLearningModel.DataEntities;
-using MachineLearningModel.Enums;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.ML;
-using Microsoft.ML;
 
 namespace Api.Controllers;
 
@@ -43,38 +40,33 @@ public class ClinicalRecordController : ControllerBase
     if (clinicalRecord is null) return BadRequest($"Couldn't find clinical record with id: {id}");
     return Ok(clinicalRecord.ToDto());
   }
-  
-  
+
 
   [HttpPost]
   public async Task<IActionResult> CreateClinicalRecord(AddClinicalRecordDto clinicalRecordDto)
   {
     var patient = await _context.Patients.FindAsync(clinicalRecordDto.PatientId);
-    if (patient is null)
-    {
-      return BadRequest($"Couldn't find patient with id: {clinicalRecordDto.PatientId}");
-    }
+    if (patient is null) return BadRequest($"Couldn't find patient with id: {clinicalRecordDto.PatientId}");
 
     var patientDto = patient.ToDto();
     var heartDiseaseData = new HeartDiseaseData
     {
-      Age = (float)patientDto.Age,
-      Sex = patientDto.Sex == "Male"?1f:0f,
+      Age = patientDto.Age,
+      Sex = patientDto.Sex == "Male" ? 1f : 0f,
       Cp = (float)clinicalRecordDto.ChestPainType,
-      Trestbps = (float)clinicalRecordDto.RestingBloodPressure,
-      Chol = (float)clinicalRecordDto.CholesterolTotal,
+      Trestbps = clinicalRecordDto.RestingBloodPressure,
+      Chol = clinicalRecordDto.CholesterolTotal,
       Fbs = clinicalRecordDto.FastingBloodSugar >= 120 ? 1f : 0f,
       Restecg = (float)clinicalRecordDto.RestECG,
-      Thalach = (float)clinicalRecordDto.MaximumHeartRate,
+      Thalach = clinicalRecordDto.MaximumHeartRate,
       Exang = clinicalRecordDto.ExerciseInducedAngina ? 1f : 0f,
       Oldpeak = (float)clinicalRecordDto.OldPeak,
       Slope = (float)clinicalRecordDto.Slope,
-      Ca = (float)clinicalRecordDto.MajorVesselsColored,
+      Ca = clinicalRecordDto.MajorVesselsColored,
       Thal = (float)clinicalRecordDto.Thalassemia
     };
-    
 
-    
+
     var prediction = await Task.FromResult(_predictionEnginePool.Predict("HeartDiseaseModel", heartDiseaseData));
     var clinicalRecordToAdd = clinicalRecordDto.ToEntity();
     clinicalRecordToAdd.Label = prediction.Prediction;

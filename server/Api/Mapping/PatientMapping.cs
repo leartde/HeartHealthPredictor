@@ -32,11 +32,11 @@ public static class PatientMapping
       Email = dto.Email
     };
   }
-  
+
   private static int CalculateAge(DateOnly dob)
   {
     var today = DateOnly.FromDateTime(DateTime.UtcNow);
-    var age = today.Year - dob.Year;
+    int age = today.Year - dob.Year;
     if (dob > today.AddYears(-age))
       age--;
     return age;

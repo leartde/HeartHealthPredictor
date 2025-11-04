@@ -11,7 +11,7 @@ public static class DoctorMapping
     {
       Id = entity.Id,
       FirstName = entity.FirstName,
-      LastName = entity.LastName,
+      LastName = entity.LastName
     };
   }
 
@@ -20,7 +20,7 @@ public static class DoctorMapping
     return new Doctor
     {
       FirstName = dto.FirstName,
-      LastName = dto.LastName,
+      LastName = dto.LastName
     };
   }
 }

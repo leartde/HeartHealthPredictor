@@ -6,10 +6,10 @@ using Microsoft.Extensions.ML;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
-var modelPath = Path.Combine(builder.Environment.ContentRootPath, "MachineLearningModels", "HeartDiseaseModel.zip");
+string modelPath = Path.Combine(builder.Environment.ContentRootPath, "MachineLearningModels", "HeartDiseaseModel.zip");
 
 builder.Services.AddPredictionEnginePool<HeartDiseaseData, HeartDiseasePrediction>()
-  .FromFile(modelName: "HeartDiseaseModel", filePath: modelPath, watchForChanges: true);
+  .FromFile("HeartDiseaseModel", modelPath, true);
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
   options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
@@ -30,12 +30,10 @@ var app = builder.Build();
 app.UseCors("CorsPolicy");
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+  app.UseSwagger();
+  app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
 app.MapControllers();
 app.Run();
-
-

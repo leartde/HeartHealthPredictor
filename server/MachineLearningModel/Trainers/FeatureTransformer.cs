@@ -1,6 +1,7 @@
-﻿using Microsoft.ML;
+﻿using MachineLearningModel.DataEntities;
+using Microsoft.ML;
 using Microsoft.ML.Transforms;
-using MachineLearningModel.DataEntities;
+
 namespace MachineLearningModel.Trainers;
 
 public static class FeatureTransformer

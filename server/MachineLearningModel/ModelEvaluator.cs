@@ -5,14 +5,15 @@ namespace MachineLearningModel;
 
 public static class ModelEvaluator
 {
-    public static CalibratedBinaryClassificationMetrics Evaluate(MLContext context, ITransformer model, IDataView splitTestSet)
-    {
-    IDataView predictions = model.Transform(splitTestSet);
+  public static CalibratedBinaryClassificationMetrics Evaluate(MLContext context, ITransformer model,
+    IDataView splitTestSet)
+  {
+    var predictions = model.Transform(splitTestSet);
     var metrics = context.BinaryClassification.Evaluate(
-      data: predictions,
-      labelColumnName: "Label",
-      scoreColumnName: "Score"
-      );
+      predictions,
+      "Label",
+      "Score"
+    );
     Console.WriteLine();
     Console.WriteLine("Model quality metrics evaluation");
     Console.WriteLine("--------------------------------");
@@ -27,7 +28,5 @@ public static class ModelEvaluator
     Console.WriteLine($"  NegativeRecall:    {metrics.NegativeRecall:0.##}");
     Console.WriteLine("=============== End of model evaluation ===============");
     return metrics;
-    
   }
 }
-  

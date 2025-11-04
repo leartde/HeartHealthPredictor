@@ -3,14 +3,14 @@ using MachineLearningModel.Trainers;
 using Microsoft.ML;
 
 namespace MachineLearningModel;
-using static Microsoft.ML.DataOperationsCatalog;
 
 public class MachineLearningBuilder
 {
-  private string _dataPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data");
-  private double _testSplit = 0.2;
   private TrainingAlgorithm _algorithm;
-  private int? _seed = null;
+  private string _dataPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data");
+  private readonly int? _seed = null;
+  private double _testSplit = 0.2;
+
   public MachineLearningBuilder WithData(string dataPath)
   {
     _dataPath = Path.Combine(_dataPath, dataPath);
@@ -26,10 +26,8 @@ public class MachineLearningBuilder
   public MachineLearningBuilder WithTestSplit(double testSplit)
   {
     if (testSplit is < 0 or > 1)
-    {
       throw new ArgumentException("Test value should be between 0 and 1.\n" +
                                   "Recommended value is between 0.2 and 0.3");
-    }
     _testSplit = testSplit;
     return this;
   }
@@ -42,8 +40,8 @@ public class MachineLearningBuilder
 
   public TrainingResult Build()
   {
-    MLContext context = new MLContext(_seed);
-    TrainTestData splitDataView = context.LoadData(_dataPath, _testSplit);
+    var context = new MLContext(_seed);
+    var splitDataView = context.LoadData(_dataPath, _testSplit);
     ITrainer trainer = _algorithm switch
     {
       TrainingAlgorithm.FastTree => new FastTreeBinaryTrainer(),
@@ -52,12 +50,12 @@ public class MachineLearningBuilder
       TrainingAlgorithm.SdcaLogisticRegression => new SdcaLogisticRegressionTrainer(),
       _ => throw new ArgumentException("Unknown algorithm")
     };
-    ITransformer model = trainer.BuildAndTrainModel(context, splitDataView.TrainSet);
-    return new TrainingResult 
-    { 
-      Model = model, 
-      Context = context, 
-      SplitData = splitDataView 
+    var model = trainer.BuildAndTrainModel(context, splitDataView.TrainSet);
+    return new TrainingResult
+    {
+      Model = model,
+      Context = context,
+      SplitData = splitDataView
     };
   }
 }

@@ -11,10 +11,12 @@ namespace Api.Controllers;
 public class PatientController : ControllerBase
 {
   private readonly ApplicationDbContext _context;
+
   public PatientController(ApplicationDbContext context)
   {
     _context = context;
   }
+
   [HttpGet]
   public async Task<IActionResult> GetPatients()
   {
@@ -34,8 +36,8 @@ public class PatientController : ControllerBase
   [HttpPost]
   public async Task<IActionResult> CreatePatient(AddPatientDto patientDto)
   {
-     var patient = patientDto.ToEntity();
-      await _context.Patients.AddAsync(patient);
+    var patient = patientDto.ToEntity();
+    await _context.Patients.AddAsync(patient);
     await _context.SaveChangesAsync();
     return Ok(patient);
   }

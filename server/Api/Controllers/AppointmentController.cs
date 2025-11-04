@@ -36,10 +36,7 @@ public class AppointmentController : ControllerBase
       .Include(a => a.Patient)
       .SingleOrDefaultAsync();
 
-    if (appointment is null)
-    {
-      return BadRequest($"Couldn't find appointment with id: {id}");
-    }
+    if (appointment is null) return BadRequest($"Couldn't find appointment with id: {id}");
 
     return Ok(appointment.ToDto());
   }
@@ -58,10 +55,7 @@ public class AppointmentController : ControllerBase
   {
     var appointment = await _context.Appointments
       .FindAsync(id);
-    if (appointment is null)
-    {
-      return BadRequest($"Couldn't find appointment with id: {id}");
-    }
+    if (appointment is null) return BadRequest($"Couldn't find appointment with id: {id}");
 
     _context.Appointments.Remove(appointment);
     await _context.SaveChangesAsync();

@@ -52,5 +52,4 @@ public class DoctorController : ControllerBase
     await _context.SaveChangesAsync();
     return Ok($"Doctor with id: {id} successfully deleted from the database");
   }
-  
 }

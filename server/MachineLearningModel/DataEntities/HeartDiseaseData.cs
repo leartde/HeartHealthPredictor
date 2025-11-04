@@ -81,6 +81,4 @@ public class HeartDiseaseData
            $"\nNumber of major vessels colored by fluoroscopy : {Ca}" +
            $"\nThalassemia : {ThalassemiaResults((int)Thal)}";
   }
-
- 
 }

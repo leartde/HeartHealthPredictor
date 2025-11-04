@@ -1,6 +1,4 @@
-﻿using System.Reflection.Emit;
-
-namespace MachineLearningModel.DataEntities;
+﻿namespace MachineLearningModel.DataEntities;
 
 public class PatientPredictionResult : HeartDiseasePrediction
 {

@@ -1,7 +1,6 @@
 ﻿using Api.DTOs.ClinicalRecord;
-using Api.Models;
 using Api.Helpers;
-using MachineLearningModel.DataEntities;
+using Api.Models;
 
 namespace Api.Mapping;
 
@@ -19,7 +18,7 @@ public static class ClinicalRecordMapping
       RestingBloodPressure = entity.RestingBloodPressure,
       CholesterolTotal = entity.CholesterolTotal,
       FastingBloodSugar =
-        entity.FastingBloodSugar ? "Greater than or equal to 120 mg/ml": "Lower than 120 mg/ml",
+        entity.FastingBloodSugar ? "Greater than or equal to 120 mg/ml" : "Lower than 120 mg/ml",
       RestEcg = entity.RestEcg.GetDisplayName(),
       MaximumHeartRate = entity.MaximumHeartRate,
       ExerciseInducedAngina = entity.ExerciseInducedAngina,
@@ -28,7 +27,7 @@ public static class ClinicalRecordMapping
       MajorVesselsColored = entity.MajorVesselsColored,
       Thalassemia = entity.Thalassemia.GetDisplayName(),
       Label = entity.Label,
-      Probability = entity.Probability,
+      Probability = entity.Probability
     };
   }
 
@@ -48,10 +47,7 @@ public static class ClinicalRecordMapping
       OldPeak = dto.OldPeak,
       Slope = dto.Slope,
       MajorVesselsColored = dto.MajorVesselsColored,
-      Thalassemia = dto.Thalassemia,
+      Thalassemia = dto.Thalassemia
     };
   }
-
-  
-  
 }

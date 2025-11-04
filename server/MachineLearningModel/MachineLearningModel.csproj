@@ -8,9 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="microsoft.ml" Version="4.0.2" />
-    <PackageReference Include="microsoft.ml.fasttree" Version="4.0.2" />
-    <PackageReference Include="Microsoft.ML.LightGbm" Version="4.0.2" />
+    <PackageReference Include="microsoft.ml" Version="4.0.2"/>
+    <PackageReference Include="microsoft.ml.fasttree" Version="4.0.2"/>
+    <PackageReference Include="Microsoft.ML.LightGbm" Version="4.0.2"/>
   </ItemGroup>
 
 </Project>
