@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import type { Patient } from "../Types/Patient.ts";
 import FetchAllPatients from "../Services/Patient/FetchAllPatients.ts";
 import Table from "../Components/Table.tsx";
 import { Link } from "react-router";
-import DeleteDoctor from "../Services/Doctor/DeleteDoctor.ts";
 import DeletePatient from "../Services/Patient/DeletePatient.ts";
 
 const Patients = () => {
@@ -37,6 +36,9 @@ const Patients = () => {
     if (result) {
       setPatients(patients.filter(patient => patient.id !== id));
     }
+  }
+  if(!patients){
+    return <p className="text-green-800 text-lg">No patients found</p>
   }
   return (
     <>

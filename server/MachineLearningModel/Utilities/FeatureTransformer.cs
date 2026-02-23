@@ -2,7 +2,7 @@
 using Microsoft.ML;
 using Microsoft.ML.Transforms;
 
-namespace MachineLearningModel.Trainers;
+namespace MachineLearningModel.Utilities;
 
 public static class FeatureTransformer
 {

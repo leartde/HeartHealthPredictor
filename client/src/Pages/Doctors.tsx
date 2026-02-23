@@ -20,6 +20,9 @@ const Doctors = () => {
       setDoctors(doctors.filter(doctor => doctor.id !== id));
     }
   }
+  if(!doctors){
+    return <p className="text-green-800 text-lg">No doctors found</p>
+  }
   return (
     <>
       <h2 className="text-2xl font-bold text-green-800 mb-4">Doctor Records</h2>

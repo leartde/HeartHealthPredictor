@@ -2,7 +2,7 @@
 using Microsoft.ML;
 using static Microsoft.ML.DataOperationsCatalog;
 
-namespace MachineLearningModel;
+namespace MachineLearningModel.Utilities;
 
 public static class DataSplitter
 {

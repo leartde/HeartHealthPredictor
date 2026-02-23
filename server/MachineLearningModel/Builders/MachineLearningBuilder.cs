@@ -1,14 +1,16 @@
 ﻿using MachineLearningModel.Enums;
+using MachineLearningModel.Results;
 using MachineLearningModel.Trainers;
+using MachineLearningModel.Utilities;
 using Microsoft.ML;
 
-namespace MachineLearningModel;
+namespace MachineLearningModel.Builders;
 
 public class MachineLearningBuilder
 {
+  private readonly int? _seed = 1;
   private TrainingAlgorithm _algorithm;
   private string _dataPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data");
-  private readonly int? _seed = null;
   private double _testSplit = 0.2;
 
   public MachineLearningBuilder WithData(string dataPath)

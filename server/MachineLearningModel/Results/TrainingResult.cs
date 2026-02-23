@@ -1,10 +1,10 @@
 ﻿using Microsoft.ML;
-
-namespace MachineLearningModel;
+using static Microsoft.ML.DataOperationsCatalog;
+namespace MachineLearningModel.Results;
 
 public class TrainingResult
 {
   public ITransformer Model { get; set; } = null!;
   public MLContext Context { get; set; } = null!;
-  public DataOperationsCatalog.TrainTestData SplitData { get; set; }
+  public TrainTestData SplitData { get; set; }
 }

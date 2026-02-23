@@ -1,7 +1,7 @@
 ﻿using MachineLearningModel.DataEntities;
 using Microsoft.ML;
 
-namespace MachineLearningModel;
+namespace MachineLearningModel.Predictors;
 
 public static class Predictor
 {

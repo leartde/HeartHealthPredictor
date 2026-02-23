@@ -65,8 +65,6 @@ public class ClinicalRecordController : ControllerBase
       Ca = clinicalRecordDto.MajorVesselsColored,
       Thal = (float)clinicalRecordDto.Thalassemia
     };
-
-
     var prediction = await Task.FromResult(_predictionEnginePool.Predict("HeartDiseaseModel", heartDiseaseData));
     var clinicalRecordToAdd = clinicalRecordDto.ToEntity();
     clinicalRecordToAdd.Label = prediction.Prediction;

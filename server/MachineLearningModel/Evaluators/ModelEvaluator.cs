@@ -1,21 +1,20 @@
-﻿using Microsoft.ML;
+﻿using MachineLearningModel.Enums;
+using Microsoft.ML;
 using Microsoft.ML.Data;
 
-namespace MachineLearningModel;
+namespace MachineLearningModel.Evaluators;
 
 public static class ModelEvaluator
 {
   public static CalibratedBinaryClassificationMetrics Evaluate(MLContext context, ITransformer model,
-    IDataView splitTestSet)
+    IDataView splitTestSet, TrainingAlgorithm algorithm)
   {
     var predictions = model.Transform(splitTestSet);
     var metrics = context.BinaryClassification.Evaluate(
-      predictions,
-      "Label",
-      "Score"
+      predictions
     );
     Console.WriteLine();
-    Console.WriteLine("Model quality metrics evaluation");
+    Console.WriteLine($"Model quality metrics evaluation for {algorithm.ToString()}");
     Console.WriteLine("--------------------------------");
     Console.WriteLine($"Accuracy: {metrics.Accuracy:P2}");
     Console.WriteLine($"Auc: {metrics.AreaUnderRocCurve:P2}");

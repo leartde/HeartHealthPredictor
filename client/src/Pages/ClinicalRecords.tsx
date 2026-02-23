@@ -4,6 +4,7 @@ import type { ClinicalRecord } from "../Types/ClinicalRecord.ts";
 import FetchAllClinicalRecords from "../Services/ClinicalRecord/FetchAllClinicalRecords.ts";
 import { Link } from "react-router";
 import DeleteClinicalRecord from "../Services/ClinicalRecord/DeleteClinicalRecord.ts";
+import { riskLabel } from "../Utils/riskLabel.ts";
 
 const ClinicalRecords = () => {
   const [clinicalRecords, setClinicalRecords] = useState<ClinicalRecord[]>([]);
@@ -21,6 +22,9 @@ const ClinicalRecords = () => {
       setClinicalRecords(clinicalRecords.filter(record => record.id !== id));
     }
   }
+  if(!clinicalRecords){
+    return <p className="text-green-800 text-lg">No clinical records found</p>
+  }
   return (
     <>
       <h2 className="text-2xl font-bold text-green-800 mb-4">Clinical Records</h2>
@@ -33,8 +37,8 @@ const ClinicalRecords = () => {
         `${record.recordedByDoctor.firstName} ${record.recordedByDoctor.lastName}`,
         new Date(record.recordedDate).toLocaleDateString(),
         record.patient.sex,
-        (Math.round(record.probability * 100 * 100) / 100).toFixed(2) + '%',
-        record.label ? 'True' : 'False',
+        (Math.round(record.probability * 100 * 100) / 100)+ '%',
+        riskLabel(record.probability),
         <Link to={`${record.id}`} className="text-gray-900"> Click here to view full details </Link>,
         <button onClick={handleDelete(record.id)} className="bg-red-600 cursor-pointer hover:bg-red-700 text-white font-bold py-1 px-2 rounded ml-2"> Delete </button>
       ]))}

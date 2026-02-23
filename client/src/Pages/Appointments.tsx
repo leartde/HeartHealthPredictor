@@ -6,7 +6,7 @@ import { Link } from "react-router";
 import DeleteAppointment from "../Services/Appointment/DeleteAppointment.ts";
 
 const Appointments = () => {
-  const [appointment, setAppointments] = useState<Appointment[]>([])
+  const [appointments, setAppointments] = useState<Appointment[]>([])
   useEffect(() => {
     const getAppointments = async()=>{
        const data = await FetchAllAppointments();
@@ -17,15 +17,18 @@ const Appointments = () => {
   const handleDelete = (id: number) => async() =>{
     const result = await DeleteAppointment(id);
     if(result){
-      setAppointments(appointment.filter(app => app.id !== id));
+      setAppointments(appointments.filter(app => app.id !== id));
     }
+  }
+  if(!appointments){
+    return <p className="text-green-800 text-lg">No appointments found</p>
   }
   return (
     <>
       <h2 className="text-2xl font-bold text-green-800 mb-4">Appointments</h2>
       <div className="overflow-x-auto rounded-lg text-green-800 mb-4">
         <Table headers={["Id", "Patient Name", "Doctor Name", "Time", ""]}
-               rows={appointment.map((app) => ([
+               rows={appointments.map((app) => ([
                  app.id,
                  `${app.patient.firstName} ${app.patient.lastName}`,
                  `${app.doctor.firstName} ${app.doctor.lastName}`,
